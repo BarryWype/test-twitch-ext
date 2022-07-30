@@ -1,6 +1,10 @@
 <template>
   <div>
-    <img alt="Vue logo" @click='handleclick' src="./assets/logo.png">
+    <img
+      alt="Vue logo"
+      src="./assets/logo.png"
+      @click="handleclick"
+    >
     <h1>COUCOU LES IENCHS</h1>
   </div>
 </template>

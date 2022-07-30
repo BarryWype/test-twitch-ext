@@ -1,6 +1,6 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
     entry: './src/main.js',
@@ -15,12 +15,14 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },
+
             // this will apply to both plain `.js` files
             // AND `<script>` blocks in `.vue` files
             {
                 test: /\.js$/,
                 loader: 'babel-loader'
             },
+
             // this will apply to both plain `.css` files
             // AND `<style>` blocks in `.vue` files
             {

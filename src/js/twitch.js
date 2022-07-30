@@ -11,17 +11,15 @@ export default {
     init() {
 
         this.onContext(function (context) {
-            twitch.rig.log(context);
-        });
+            twitch.rig.log(context)
+        })
 
-        this.onAuthorized((auth) => {
+        this.onAuthorized(auth => {
 
             // save our credentials
-            this.token = auth.token;
-            this.tuid = auth.userId;
-
-            setAuth(token);
-        });
+            this.token = auth.token
+            this.tuid = auth.userId
+        })
     },
 
     log(item) {
@@ -33,14 +31,16 @@ export default {
     },
 
     testBackend() {
-        // if (!this.token) { return this.log('Not authorized'); }
         this.log(this.token)
 
         axios.get('http://localhost:8081/color/query', {
             headers: {
                 "Authorization": 'Bearer ' + this.token,
             },
-        }).then((response) => this.log(response))
+        }).then(response => {
+            this.log('qwd')
+            this.log(response)
+        })
     },
 
 
