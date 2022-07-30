@@ -4,9 +4,9 @@ const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config()
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -39,4 +39,6 @@ app.use(function (err, req, res, next) {
 
 module.exports = app;
 
-app.listen('3000', () => console.log(`Hello world app listening on port 3000!`))
+const port = process.env.PORT
+
+app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
