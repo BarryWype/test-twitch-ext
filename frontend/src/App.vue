@@ -5,7 +5,15 @@
       src="./assets/logo.png"
       @click="handleclick"
     >
-    <h1>COUCOU LES IENCHS</h1>
+    <input type="text" id="urlSteamProfil">
+    <button
+      name="test"
+      @click="handleclickbutton"
+    >
+      test
+    </button>
+    <h1 v-if="nickname">COUCOU {{this.nickname}}</h1>
+    <h1 v-else>COUCOU LES CHIENS</h1>
   </div>
 </template>
 
@@ -17,9 +25,28 @@ export default {
     this.$twitch.init()
   },
 
+  data() {
+    return {
+      nickname: null
+    }
+  },
+
   methods: {
     handleclick() {
-      this.$twitch.testBackend()
+      console.log(this.$twitch.testBackend())
+      this.$twitch.testBackend().then(data => {
+        console.log('data', data)
+        this.nickname = data.nickname
+      })
+    },
+
+    handleclickbutton() {
+      let url = document.getElementById("urlSteamProfil").value
+      console.log(url)
+      this.$twitch.testBackend2(url).then(data => {
+        console.log('data', data)
+        this.nickname = data.nickname
+      })
     }
   },
 

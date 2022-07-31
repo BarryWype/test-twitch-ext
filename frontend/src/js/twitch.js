@@ -32,15 +32,30 @@ export default {
 
     testBackend() {
         this.log(this.token)
+        console.log(this.token)
 
-        axios.get('http://localhost:8081/color/query', {
-            headers: {
-                "Authorization": 'Bearer ' + this.token,
-            },
-        }).then(response => {
-            this.log('qwd')
-            this.log(response)
-        })
+        // create a promise for the axios request
+        const promise = axios.get('http://localhost:8081/user')
+
+        // using .then, create a new promise which extracts the data
+        const dataPromise = promise.then(response => response.data.a)
+
+        // return it
+        return dataPromise
+    },
+
+    testBackend2(url) {
+        this.log(this.token)
+        console.log(this.token)
+
+        // create a promise for the axios request
+        const promise = axios.get('http://localhost:8081/user', { params: { urlSteamProfil: url } })
+
+        // using .then, create a new promise which extracts the data
+        const dataPromise = promise.then(response => response.data.a)
+
+        // return it
+        return dataPromise
     },
 
 
