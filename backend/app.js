@@ -6,6 +6,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('dotenv').config()
 
+// need but unused for now
+const fs = require('fs');
+const jsonwebtoken = require('jsonwebtoken');
+const request = require('request');
+
 const indexRouter = require('./routes/index');
 
 const app = express();
@@ -28,13 +33,14 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  console.log(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ error: err })
 });
 
 module.exports = app;
