@@ -1,0 +1,28 @@
+_id: req_65e3a8af38784d49bc9a6a9ccc9de2dc
+type: Request
+parentId: fld_8c6ed7aebcf84804a0fd085e068dda99
+modified: 1659228942482
+created: 1659226965786
+url: http://localhost:8081/game
+name: Game
+description: ""
+method: GET
+body: {}
+parameters:
+  - id: pair_38811ded3c3c455085f92a48936e01da
+    name: appId
+    value: "211420"
+    description: ""
+headers: []
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTkyOTIzMDIsIm9wYXF1ZV91c2VyX2lkIjoiVTkwODg4MDUzIiwicm9sZSI6ImJyb2FkY2FzdGVyIiwicHVic3ViX3Blcm1zIjp7Imxpc3RlbiI6WyJicm9hZGNhc3QiLCJnbG9iYWwiXSwic2VuZCI6WyJicm9hZGNhc3QiXX0sImNoYW5uZWxfaWQiOiI5MDg4ODA1MyIsInVzZXJfaWQiOiI5MDg4ODA1MyIsImlhdCI6MTY1OTIwNTkwMn0.SDSugoCdpL0oZzSDY3i99DlXqSnHZdCjH82QHo0RVB8
+  prefix: ""
+metaSortKey: -1659149342344
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
