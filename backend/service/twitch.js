@@ -34,6 +34,7 @@ const twitch = {
     serverTokenDurationSec: 30,
 
     colorCycleHandler(req) {
+        console.log(req.header.authorization);
         // Verify all requests.
         const payload = this.verifyAndDecode(req.headers.authorization);
         const { channel_id: channelId, opaque_user_id: opaqueUserId } = payload;

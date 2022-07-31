@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/user', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
-  steam.resolve('https://steamcommunity.com/profiles/76561198020613214/').then(id => {
+  steam.resolve(req.query.urlSteamProfil).then(id => {
     console.log(id);
     steam.getUserSummary(id).then(summary => {
       console.log(summary);
