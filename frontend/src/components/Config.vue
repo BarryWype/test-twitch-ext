@@ -1,10 +1,21 @@
 <template>
   <div class="hello">
-    Ceci est une Config
-    <input
-      id="urlSteamProfil"
-      type="text"
-    >
+    <span>
+      Profil : 
+      <input
+        id="urlSteamProfil"
+        type="text"
+        value="https://steamcommunity.com/profiles/76561198020613214/"
+      >
+    </span>
+    <span>
+      AppId :
+      <input
+        id="appID"
+        type="text"
+        value="211420"
+      >
+    </span>
     <button
       name="test"
       @click="handleclickbutton"
@@ -16,22 +27,25 @@
 </template>
 
 <script>
-const twitch = window.Twitch.ext
+const twitchExt = window.Twitch.ext
 
 export default {
   name: 'ConfigVue',
 
   mounted() {
-        this.$twitch.init()
+    this.$twitch.init()
   },
 
   methods: {
     handleclickbutton() {
       let url = document.getElementById("urlSteamProfil").value
-      this.$twitch.testBackend2(url).then(data => {
+      let appID = document.getElementById("appID").value
+      this.$steam.callUserSteamProfile(url).then(data => {
         console.log('steamID', data.steamID)
-        twitch.configuration.set("broadcaster", "1", data.steamID)
-        console.log('conf', twitch.configuration.broadcaster)
+        console.log('appID', appID)
+        const steamID = data.steamID
+        twitchExt.configuration.set("broadcaster", "1", JSON.stringify({'steamID': steamID, 'appID': appID }))
+        console.log(twitchExt.configuration)
       })
     }
   },

@@ -15,50 +15,37 @@ router.get('/user', function (req, res, next) {
   steam.resolve(req.query.urlSteamProfil).then(id => {
     console.log(id);
     steam.getUserSummary(id).then(summary => {
-      console.log(summary);
-      res.end(JSON.stringify({ a: summary }));
+      res.end(JSON.stringify({ res: summary }));
     });
   }).catch(() => {
-    res.end(JSON.stringify({ a: "error" }));
+    res.end(JSON.stringify({ res: "error" }));
   });
 });
 
 router.get('/apps', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
-  steam.resolve('https://steamcommunity.com/profiles/76561198020613214/').then(id => {
-    console.log(id);
-    steam.getUserOwnedGames(id).then(apps => {
-      console.log(apps);
-      res.end(JSON.stringify({ res: apps }));
-    })
+  steam.getUserOwnedGames(req.query.steamID).then(apps => {
+    res.end(JSON.stringify({ res: apps }));
   }).catch(() => {
-    res.end(JSON.stringify({ a: "error" }));
+    res.end(JSON.stringify({ res: "error" }));
   });
 });
 
 router.get('/achivement', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
-  steam.resolve('https://steamcommunity.com/profiles/76561198020613214/').then(id => {
-    console.log(id);
-    steam.get(`/ISteamUserStats/GetPlayerAchievements/v1?steamid=${id}&appid=${req.query.appId}&l=french`).then(success => {
-      console.log(success);
-      res.end(JSON.stringify({ res: success }));
-    })
+  steam.get(`/ISteamUserStats/GetPlayerAchievements/v1?steamid=${req.query.steamID}&appid=${req.query.appID}&l=french`).then(success => {
+    res.end(JSON.stringify({ res: success.playerstats.achievements }));
   }).catch(() => {
-    res.end(JSON.stringify({ a: "error" }));
+    res.end(JSON.stringify({ res: "error" }));
   });
 });
 
 router.get('/game', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
-  steam.resolve('https://steamcommunity.com/profiles/76561198020613214/').then(id => {
-    console.log(id);
-    steam.getGameSchema(req.query.appId).then(success => {
-      console.log(success);
-      res.end(JSON.stringify({ res: success }));
-    })
+  steam.getGameSchema(req.query.appID).then(success => {
+    res.end(JSON.stringify({ res: success }));
   }).catch(() => {
-    res.end(JSON.stringify({ a: "error" }));
+    res.end(JSON.stringify({ res: "error" }));
   });
 });
 

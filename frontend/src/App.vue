@@ -10,52 +10,62 @@
 </template>
 
 <script>
-import twitch from './js/twitch'
 
 const twitchExt = window.Twitch.ext
 
 export default {
-  name: 'App',
+    name: "App",
 
-  data() {
-    return {
-      nickname: null,
-      steamID: null
-    }
-  },
-
-  beforeMount() {
-    this.$twitch.init()
-  },
-
-  created() {
-    twitchExt.configuration.onChanged(function() {
-      // Checks if configuration is defined
-      console.log("test")
-      if (twitchExt.configuration.broadcaster) {
-        console.log(twitch.configuration.broadcaster)
-        try {
-          // Parsing the array saved in broadcaster content
-          this.steamID = twitchExt.configuration.broadcaster.content
-          console.log(this.steamID)
-          console.log(twitch.testBackend2)
-          twitch.testBackend2(this.steamID).then(data => {
-            console.log('data', data)
-            this.nickname = data.nickname
-            console.log(this.nickname)
-          })  
-        } catch (e) {
-          console.log('Invalid config')
+    data() {
+        return {
+            nickname: null,
+            steamID: null,
+            appID: null
         }
-      }
-    })
-  },
-
-  methods: {
-    
-  },
-
-
+    },
+    beforeMount() {
+      this.$twitch.init()  
+    },
+    created() {
+      let self = this
+      twitchExt.configuration.onChanged(function() {
+        self.handleInit()
+        self.handleClickAchivement()
+        self.handleClickApps()
+      })
+    },
+    methods: {
+        handleInit() {
+          console.log("init")
+          if (twitchExt.configuration.broadcaster) {
+            let content = JSON.parse(twitchExt.configuration.broadcaster.content)
+            console.log(content)
+            try {
+                // Parsing the array saved in broadcaster content
+                console.log(content.appID)
+                this.steamID = content.steamID
+                this.appID = content.appID
+                this.$steam.callUserSteamProfile(this.steamID).then(data => {
+                  this.nickname = data.nickname
+                })
+            }
+            catch (e) {
+              console.log("Invalid config")
+            }
+          }
+        },
+        handleClickAchivement() {
+            this.$steam.callGameAchivement(this.steamID, this.appID).then(data => {
+                console.log("achivement", data)
+            })
+        },
+        handleClickApps() {
+            console.log('appId', this.appID)
+            this.$steam.callGameInformation(this.appID).then(data => {
+                console.log("app", data)
+            })
+        }
+    },
 }
 </script>
 
