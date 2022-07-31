@@ -1,0 +1,28 @@
+_id: req_ee190a9973f24500865f7d229f7184ad
+type: Request
+parentId: fld_8c6ed7aebcf84804a0fd085e068dda99
+modified: 1659227948390
+created: 1659225734609
+url: http://localhost:8081/user
+name: User
+description: ""
+method: GET
+body: {}
+parameters:
+  - id: pair_38811ded3c3c455085f92a48936e01da
+    name: ""
+    value: ""
+    description: ""
+headers: []
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTkyOTIzMDIsIm9wYXF1ZV91c2VyX2lkIjoiVTkwODg4MDUzIiwicm9sZSI6ImJyb2FkY2FzdGVyIiwicHVic3ViX3Blcm1zIjp7Imxpc3RlbiI6WyJicm9hZGNhc3QiLCJnbG9iYWwiXSwic2VuZCI6WyJicm9hZGNhc3QiXX0sImNoYW5uZWxfaWQiOiI5MDg4ODA1MyIsInVzZXJfaWQiOiI5MDg4ODA1MyIsImlhdCI6MTY1OTIwNTkwMn0.SDSugoCdpL0oZzSDY3i99DlXqSnHZdCjH82QHo0RVB8
+  prefix: ""
+metaSortKey: -1659149342544
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
