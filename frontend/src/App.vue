@@ -1,53 +1,58 @@
 <template>
   <div>
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png"
-      @click="handleclick"
-    >
-    <input type="text" id="urlSteamProfil">
-    <button
-      name="test"
-      @click="handleclickbutton"
-    >
-      test
-    </button>
-    <h1 v-if="nickname">COUCOU {{this.nickname}}</h1>
-    <h1 v-else>COUCOU LES CHIENS</h1>
+    <h1 v-if="nickname">
+      Achivement {{ nickname }}
+    </h1>
+    <h1 v-else>
+      The broadcaster need to configure the extension
+    </h1>
   </div>
 </template>
 
 <script>
+import twitch from './js/twitch'
+
+const twitchExt = window.Twitch.ext
+
 export default {
   name: 'App',
 
-  mounted() {
+  data() {
+    return {
+      nickname: null,
+      steamID: null
+    }
+  },
+
+  beforeMount() {
     this.$twitch.init()
   },
 
-  data() {
-    return {
-      nickname: null
-    }
+  created() {
+    twitchExt.configuration.onChanged(function() {
+      // Checks if configuration is defined
+      console.log("test")
+      if (twitchExt.configuration.broadcaster) {
+        console.log(twitch.configuration.broadcaster)
+        try {
+          // Parsing the array saved in broadcaster content
+          this.steamID = twitchExt.configuration.broadcaster.content
+          console.log(this.steamID)
+          console.log(twitch.testBackend2)
+          twitch.testBackend2(this.steamID).then(data => {
+            console.log('data', data)
+            this.nickname = data.nickname
+            console.log(this.nickname)
+          })  
+        } catch (e) {
+          console.log('Invalid config')
+        }
+      }
+    })
   },
 
   methods: {
-    handleclick() {
-      console.log(this.$twitch.testBackend())
-      this.$twitch.testBackend().then(data => {
-        console.log('data', data)
-        this.nickname = data.nickname
-      })
-    },
-
-    handleclickbutton() {
-      let url = document.getElementById("urlSteamProfil").value
-      console.log(url)
-      this.$twitch.testBackend2(url).then(data => {
-        console.log('data', data)
-        this.nickname = data.nickname
-      })
-    }
+    
   },
 
 
