@@ -46,5 +46,16 @@ export default {
         return dataPromise
     },
 
+    callAchivementState(steamId, appId) {
+        // create a promise for the axios request
+        const promise = axios.get('http://localhost:8081/achivementState', { params: { steamID: steamId, appID: appId } })
+
+        // using .then, create a new promise which extracts the data
+        const dataPromise = promise.then(response => response.data.res)
+        
+        // return it
+        return dataPromise
+    },
+
 
 }

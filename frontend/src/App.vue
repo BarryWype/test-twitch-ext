@@ -6,6 +6,15 @@
     <h1 v-else>
       The broadcaster need to configure the extension
     </h1>
+    <p v-if="achivements.length === 0">Vide</p>
+    <div v-else>
+      Liste des succès
+      <ul>
+        <li v-for="achi in achivements">
+          {{ achi.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -18,9 +27,10 @@ export default {
 
     data() {
         return {
-            nickname: null,
-            steamID: null,
-            appID: null
+          nickname: null,
+          steamID: null,
+          appID: null,
+          achivements: []
         }
     },
     beforeMount() {
@@ -55,8 +65,9 @@ export default {
           }
         },
         handleClickAchivement() {
-            this.$steam.callGameAchivement(this.steamID, this.appID).then(data => {
-                console.log("achivement", data)
+            this.$steam.callAchivementState(this.steamID, this.appID).then(data => {
+              console.log(data)
+              this.achivements = data
             })
         },
         handleClickApps() {

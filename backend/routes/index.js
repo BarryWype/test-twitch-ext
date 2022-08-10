@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const twitch = require('../service/twitch')
 const SteamAPI = require('steamapi');
-const steam = new SteamAPI('99C5FC93E5666087F61A95A483B4416C');
+const { formatResponse } = require('../utils/achivement')
+const steam = new SteamAPI('99C5FC93E5666087F61A95A483B4416C')
+const _ = require('lodash')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -47,6 +49,25 @@ router.get('/game', function (req, res, next) {
   }).catch(() => {
     res.end(JSON.stringify({ res: "error" }));
   });
+});
+
+router.get('/achivementState', function (req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  steam.getGameSchema(req.query.appID).then(game => {
+    if(!_.isEmpty(game)) {
+      steam.get(`/ISteamUserStats/GetPlayerAchievements/v1?steamid=${req.query.steamID}&appid=${req.query.appID}&l=french`).then(achivements => {
+        let listAchivement = formatResponse(game, achivements)
+        res.end(JSON.stringify({ res: listAchivement }));
+      }).catch(() => {
+        res.end(JSON.stringify({ res: "errorAchivements" }));
+      });
+    } else {
+      res.end(JSON.stringify({ res: "NO_ACHIVEMENT" }));
+    }
+  }).catch(() => {
+    res.end(JSON.stringify({ res: "errorGame" }));
+  });
+  
 });
 
 
