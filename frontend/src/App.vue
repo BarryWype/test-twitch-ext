@@ -6,14 +6,46 @@
     <h1 v-else>
       The broadcaster need to configure the extension
     </h1>
-    <p v-if="achivements.length === 0">Vide</p>
+    <p v-if="achivements.length === 0">
+      Vide
+    </p>
     <div v-else>
-      Liste des succès
-      <ul>
-        <li v-for="achi in achivements">
-          {{ achi.name }}
-        </li>
-      </ul>
+      <h2>Liste des succès à finir</h2>
+      <div 
+        v-for="achi in achivements" 
+        :key="achi.apiname"
+      >
+        <div 
+          v-if="achi.achieved === 0" 
+          class="row"
+        >
+          <div class="col-3">
+            <img :src="achi.icon" />
+          </div>
+          <div class="col-9 text-start">
+            Name: {{ achi.name }} <br />
+            Description: {{ achi.description }}
+          </div>
+        </div>
+      </div>
+      <h2>Liste des succès terminé</h2>
+      <div 
+        v-for="achi in achivements"
+        :key="achi.apiname"
+      >
+        <div
+          v-if="achi.achieved === 1"
+          class="row"
+        >
+          <div class="col-3">
+            <img :src="achi.icon" />
+          </div>
+          <div class="col-9 text-start">
+            Name: {{ achi.name }} <br />
+            Description: {{ achi.description }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
