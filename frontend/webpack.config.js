@@ -38,6 +38,14 @@ module.exports = {
                 options: {
                     name: "img/[name].[ext]"
                 }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
         ]
     },

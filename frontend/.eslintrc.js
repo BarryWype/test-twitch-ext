@@ -1,67 +1,84 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true,
-  },
+    root: true,
+    env: {
+        node: true,
+    },
 
-  plugins: ['import'],
-  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
-  rules: {
-    // Allow call constructor starting with a lower-case letter using key word 'new'
-    'new-cap': ['error', { newIsCap: false }],
+    plugins: ['import'],
+    extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
+    rules: {
+        "indent": ["error", 4],
+        "vue/max-len": ["error", {
+            "code": 120,
+            "template": 120,
+            "tabWidth": 2,
+            "comments": 120,
+            "ignorePattern": "",
+            "ignoreComments": false,
+            "ignoreTrailingComments": false,
+            "ignoreUrls": false,
+            "ignoreStrings": false,
+            "ignoreTemplateLiterals": false,
+            "ignoreRegExpLiterals": false,
+            "ignoreHTMLAttributeValues": false,
+            "ignoreHTMLTextContents": false,
+        }],
 
-    // recommended by Vetur
-    'vue/html-self-closing': 'off',
+        // Allow call constructor starting with a lower-case letter using key word 'new'
+        'new-cap': ['error', { newIsCap: false }],
 
-    // Disable max-len
-    'max-len': 'off',
+        // recommended by Vetur
+        'vue/html-self-closing': 'off',
 
-    // we don't want it
-    semi: ['error', 'never'],
+        // Disable max-len
+        'max-len': 'off',
 
-    // add parens ony when required in arrow function
-    'arrow-parens': ['error', 'as-needed'],
+        // we don't want it
+        semi: ['error', 'never'],
 
-    // add new line above comment
-    'lines-around-comment': [
-      'error',
-      {
-        beforeBlockComment: true,
-        beforeLineComment: true,
-        allowBlockStart: true,
-        allowClassStart: true,
-        allowObjectStart: true,
-        allowArrayStart: true,
-      },
-    ],
+        // add parens ony when required in arrow function
+        'arrow-parens': ['error', 'as-needed'],
 
-    'linebreak-style': 'off',
+        // add new line above comment
+        'lines-around-comment': [
+            'error',
+            {
+                beforeBlockComment: true,
+                beforeLineComment: true,
+                allowBlockStart: true,
+                allowClassStart: true,
+                allowObjectStart: true,
+                allowArrayStart: true,
+            },
+        ],
 
-    // add new line above comment
-    'newline-before-return': 'error',
+        'linebreak-style': 'off',
 
-    'global-require': 'off',
+        // add new line above comment
+        'newline-before-return': 'error',
 
-    // import
-    'import/newline-after-import': 2,
-    'import/no-unresolved': 2,
-    'import/named': 2,
-    'import/default': 2,
-    'import/no-self-import': 2,
-    'import/export': 2,
-    'import/first': 2,
-    'import/no-duplicates': 2,
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+        'global-require': 'off',
 
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-  },
+        // import
+        'import/newline-after-import': 2,
+        'import/no-unresolved': 2,
+        'import/named': 2,
+        'import/default': 2,
+        'import/no-self-import': 2,
+        'import/export': 2,
+        'import/first': 2,
+        'import/no-duplicates': 2,
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+
+        'import/extensions': [
+            'error',
+            'ignorePackages',
+            {
+                js: 'never',
+                jsx: 'never',
+                ts: 'never',
+                tsx: 'never',
+            },
+        ],
+    },
 }
